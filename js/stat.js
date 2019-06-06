@@ -6,21 +6,16 @@ var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var SHADOW_GAP = 10;
 var GAP = 30;
-var FONT_GAP = 20;
+var HEADER_GAP = 20;
+var LINE_HEIGHT = 20;
 var FONT = '16px PT Mono';
 var COLUMN_WIDTH = 40;
-var COLUMN_HEIGHT = 150;
+var MAX_COLUMN_HEIGHT = 150;
 var COLUMN_GAP = 50;
+var COLUMN_VERTICAL_GAP = 15;
+var headerHeight = HEADER_GAP + 2 * LINE_HEIGHT + HEADER_GAP;
+var dataX = CLOUD_X + GAP;
 
-var getMaxElement = function (elements) {
-  var maxElement = elements[0];
-  for (var i = 0; i < elements.length; i++) {
-    if (elements[i] > maxElement) {
-      maxElement = elements[i];
-    }
-  }
-  return maxElement;
-};
 
 window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7) ';
@@ -32,19 +27,23 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.font = FONT;
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'hanging';
-  ctx.fillText('Ура, Вы победили!', CLOUD_X + GAP, CLOUD_Y + FONT_GAP);
-  ctx.fillText('Список результатов:', CLOUD_X + GAP, CLOUD_Y + 2 * FONT_GAP);
+  ctx.fillText('Ура, Вы победили!', dataX, CLOUD_Y + HEADER_GAP);
+  ctx.fillText('Список результатов:', dataX, CLOUD_Y + HEADER_GAP + LINE_HEIGHT);
 
-  var maxTime = getMaxElement(times);
+  var maxTime = Math.max.apply(null, times);
 
   for (var i = 0; i < names.length; i++) {
+    var columnHeight = times[i] * MAX_COLUMN_HEIGHT / maxTime;
+    var columnVerticalIndent = MAX_COLUMN_HEIGHT - columnHeight;
+    var columnX = COLUMN_GAP * i + COLUMN_WIDTH * i;
+
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), GAP + CLOUD_X + COLUMN_GAP * i + COLUMN_WIDTH * i, 4 * FONT_GAP);
-    ctx.fillText(names[i], GAP + CLOUD_X + COLUMN_GAP * i + COLUMN_WIDTH * i, 5 * FONT_GAP + COLUMN_HEIGHT + 10);
+    ctx.fillText(Math.round(times[i]), dataX + columnX, headerHeight + LINE_HEIGHT + columnVerticalIndent - COLUMN_VERTICAL_GAP);
+    ctx.fillText(names[i], dataX + columnX, headerHeight + LINE_HEIGHT + MAX_COLUMN_HEIGHT + COLUMN_VERTICAL_GAP);
     ctx.fillStyle = 'rgb(0, 0, ' + Math.random() * 255 + ')';
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
-    ctx.fillRect(GAP + CLOUD_X + COLUMN_GAP * i + COLUMN_WIDTH * i, 5 * FONT_GAP + COLUMN_HEIGHT - (times[i] * COLUMN_HEIGHT / maxTime), COLUMN_WIDTH, times[i] * COLUMN_HEIGHT / maxTime);
+    ctx.fillRect(dataX + columnX, headerHeight + LINE_HEIGHT + columnVerticalIndent, COLUMN_WIDTH, columnHeight);
   }
 };
