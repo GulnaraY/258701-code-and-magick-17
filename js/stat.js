@@ -7,13 +7,13 @@ var CLOUD_Y = 10;
 var SHADOW_GAP = 10;
 var GAP = 30;
 var HEADER_GAP = 20;
-var LINE_HEIGHT = 20;
+var LINE_HEIGHT = 23;
 var FONT = '16px PT Mono';
 var COLUMN_WIDTH = 40;
 var MAX_COLUMN_HEIGHT = 150;
 var COLUMN_GAP = 50;
 var COLUMN_VERTICAL_GAP = 15;
-var headerHeight = HEADER_GAP + 2 * LINE_HEIGHT + HEADER_GAP;
+var headerHeight = HEADER_GAP + 2 * LINE_HEIGHT;
 var dataX = CLOUD_X + GAP;
 
 
