@@ -41,7 +41,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = '#000';
     ctx.fillText(Math.round(times[i]), GAP + CLOUD_X + COLUMN_GAP * i + COLUMN_WIDTH * i, 4 * FONT_GAP);
     ctx.fillText(names[i], GAP + CLOUD_X + COLUMN_GAP * i + COLUMN_WIDTH * i, 5 * FONT_GAP + COLUMN_HEIGHT + 10);
-    ctx.fillStyle = 'rgba(0, 0, 255, ' + Math.random(0.3, 1) + ')';
+    ctx.fillStyle = 'rgb(0, 0, ' + Math.random() * 255 + ')';
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
