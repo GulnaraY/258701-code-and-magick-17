@@ -37,16 +37,16 @@ var createCharacters = function () {
   return characters;
 };
 
+var renderWizard = function (wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+  return wizardElement;
+};
+
 var showSimilarWizards = function () {
   var characters = createCharacters();
-  var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
-    return wizardElement;
-  };
-
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < SIMILAR_CHARACTERS_COUNT; i++) {
     fragment.appendChild(renderWizard(characters[i]));
