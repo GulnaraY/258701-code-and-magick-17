@@ -58,42 +58,44 @@ var showSimilarWizards = function () {
 
 showSimilarWizards();
 
-var onPopupEscPress = function (evt) {
+var onDocumentEscPress = function (evt) {
   if ((evt.keyCode === ESC_KEYCODE) && (evt.target !== userNameInput)) {
     closeWizardSetupWindow();
   }
 };
 
-var onPopupEnterClose = function (evt) {
+var onPopupCloseButtonKeyPress = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closeWizardSetupWindow();
   }
 };
 
-var onPopupEnterOpen = function (evt) {
+var onPopupOpenButtonKeyPress = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     showSetupWindow();
   }
+};
+
+var onPopupSubmitButtonPress = function () {
+  closeWizardSetupWindow();
 };
 
 var showSetupWindow = function () {
   setupWindow.classList.remove('hidden');
   setupWindow.querySelector('.setup-similar').classList.remove('hidden');
 
-  wizardSetupCloseButton.addEventListener('keydown', onPopupEnterClose);
-
-  document.addEventListener('keydown', onPopupEscPress);
-
-  setupSubmitButton.addEventListener('submit', function () {
-    closeWizardSetupWindow();
-  });
-
-  setupSubmitButton.addEventListener('keydown', onPopupEnterClose);
+  wizardSetupCloseButton.addEventListener('keydown', onPopupCloseButtonKeyPress);
+  document.addEventListener('keydown', onDocumentEscPress);
+  setupSubmitButton.addEventListener('submit', onPopupSubmitButtonPress);
+  setupSubmitButton.addEventListener('keydown', onPopupCloseButtonKeyPress);
 };
 
 var closeWizardSetupWindow = function () {
   setupWindow.classList.add('hidden');
-  document.removeEventListener('click', onPopupEscPress);
+  document.removeEventListener('click', onDocumentEscPress);
+  wizardSetupCloseButton.removeEventListener('keydown', onPopupCloseButtonKeyPress);
+  setupSubmitButton.removeEventListener('submit', onPopupSubmitButtonPress);
+  setupSubmitButton.removeEventListener('keydown', onPopupCloseButtonKeyPress);
 };
 
 wizardSetupOpenButton.addEventListener('click', function () {
@@ -104,10 +106,10 @@ wizardSetupCloseButton.addEventListener('click', function () {
   closeWizardSetupWindow();
 });
 
-wizardSetupIcon.addEventListener('keydown', onPopupEnterOpen);
+wizardSetupIcon.addEventListener('keydown', onPopupOpenButtonKeyPress);
 
 var changeCoatColor = function () {
-  if (coatChangeCounter > COAT_COLORS.length - 1) {
+  if (coatChangeCounter === COAT_COLORS.length) {
     coatChangeCounter = 0;
   }
   mainWizardCoatField.style.fill = COAT_COLORS[coatChangeCounter];
@@ -116,7 +118,7 @@ var changeCoatColor = function () {
 };
 
 var changeEyesColor = function () {
-  if (eyesChangeCounter > EYES_COLORS.length - 1) {
+  if (eyesChangeCounter === EYES_COLORS.length) {
     eyesChangeCounter = 0;
   }
   mainWizardEyesField.style.fill = EYES_COLORS[eyesChangeCounter];
@@ -125,7 +127,7 @@ var changeEyesColor = function () {
 };
 
 var changeFireballColor = function () {
-  if (fireballChangeCounter > FIREBALL_COLORS.length - 1) {
+  if (fireballChangeCounter === FIREBALL_COLORS.length) {
     fireballChangeCounter = 0;
   }
   mainWizardFireball.style.backgroundColor = FIREBALL_COLORS[fireballChangeCounter];
