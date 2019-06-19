@@ -112,7 +112,7 @@ var changeCoatColor = function () {
   if (coatChangeCounter === COAT_COLORS.length) {
     coatChangeCounter = 0;
   }
-  var color = COAT_COLORS[coatChangeCounter]
+  var color = COAT_COLORS[coatChangeCounter];
   mainWizardCoatField.style.fill = color;
   wizardCoatInput.value = color;
   coatChangeCounter++;
