@@ -92,7 +92,7 @@ var showSetupWindow = function () {
 
 var closeWizardSetupWindow = function () {
   setupWindow.classList.add('hidden');
-  document.removeEventListener('click', onDocumentEscPress);
+  document.removeEventListener('keydown', onDocumentEscPress);
   wizardSetupCloseButton.removeEventListener('keydown', onPopupCloseButtonKeyPress);
   setupSubmitButton.removeEventListener('submit', onPopupSubmitButtonPress);
   setupSubmitButton.removeEventListener('keydown', onPopupCloseButtonKeyPress);
@@ -112,8 +112,9 @@ var changeCoatColor = function () {
   if (coatChangeCounter === COAT_COLORS.length) {
     coatChangeCounter = 0;
   }
-  mainWizardCoatField.style.fill = COAT_COLORS[coatChangeCounter];
-  wizardCoatInput.value = COAT_COLORS[coatChangeCounter];
+  var color = COAT_COLORS[coatChangeCounter]
+  mainWizardCoatField.style.fill = color;
+  wizardCoatInput.value = color;
   coatChangeCounter++;
 };
 
@@ -121,8 +122,9 @@ var changeEyesColor = function () {
   if (eyesChangeCounter === EYES_COLORS.length) {
     eyesChangeCounter = 0;
   }
-  mainWizardEyesField.style.fill = EYES_COLORS[eyesChangeCounter];
-  wizardEyesColorInput.value = EYES_COLORS[eyesChangeCounter];
+  var color = EYES_COLORS[eyesChangeCounter];
+  mainWizardEyesField.style.fill = color;
+  wizardEyesColorInput.value = color;
   eyesChangeCounter++;
 };
 
@@ -130,8 +132,9 @@ var changeFireballColor = function () {
   if (fireballChangeCounter === FIREBALL_COLORS.length) {
     fireballChangeCounter = 0;
   }
-  mainWizardFireball.style.backgroundColor = FIREBALL_COLORS[fireballChangeCounter];
-  wizardFireballInput.value = FIREBALL_COLORS[fireballChangeCounter];
+  var color = FIREBALL_COLORS[fireballChangeCounter];
+  mainWizardFireball.style.backgroundColor = color;
+  wizardFireballInput.value = color;
   fireballChangeCounter++;
 };
 
