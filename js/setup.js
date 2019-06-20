@@ -25,6 +25,8 @@ var wizardFireballInput = setupWindow.querySelector('[name = fireball-color]');
 var coatChangeCounter = 1;
 var eyesChangeCounter = 1;
 var fireballChangeCounter = 1;
+var setupTop = '80px';
+var setupLeft = '50%';
 
 var getRandomElement = function (elements) {
   return elements[Math.floor(Math.random() * elements.length)];
@@ -82,6 +84,8 @@ var onPopupSubmitButtonPress = function () {
 
 var showSetupWindow = function () {
   setupWindow.classList.remove('hidden');
+  setupWindow.style.left = setupLeft;
+  setupWindow.style.top = setupTop;
   setupWindow.querySelector('.setup-similar').classList.remove('hidden');
 
   wizardSetupCloseButton.addEventListener('keydown', onPopupCloseButtonKeyPress);
