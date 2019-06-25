@@ -1,4 +1,8 @@
 'use strict';
+/**
+ * Получение и отрисовка статистики
+ *
+ */
 
 (function () {
   var CLOUD_WIDTH = 420;
