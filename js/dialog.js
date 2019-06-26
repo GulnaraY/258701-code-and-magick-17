@@ -1,9 +1,9 @@
 'use strict';
+
 /**
  * Работа с диалоговым окном: открытие, закрытие, перетаскивание
  * Зависит от модуля utils.js, получает функции обработки нажатия esc и enter
  **/
-
 (function () {
   var setupWindow = document.querySelector('.setup');
   var dialogHandle = document.querySelector('.upload');

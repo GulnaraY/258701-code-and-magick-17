@@ -1,9 +1,9 @@
 'use strict';
+
 /**
  * Отрисовка похожих персонажей
  * Зависит от модуля data.js, получает от нее случайного сгенерированного персонажа
  */
-
 (function () {
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -20,7 +20,7 @@
   var showSimilarWizards = function () {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < SIMILAR_CHARACTERS_COUNT; i++) {
-      var character = window.createCharacter();
+      var character = window.data.createCharacter();
       fragment.appendChild(renderWizard(character));
     }
     similarListElement.appendChild(fragment);

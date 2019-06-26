@@ -1,9 +1,9 @@
 'use strict';
+
 /**
  * Получение и отрисовка статистики
  *
  */
-
 (function () {
   var CLOUD_WIDTH = 420;
   var CLOUD_HEIGHT = 270;
@@ -20,7 +20,6 @@
   var COLUMN_VERTICAL_GAP = 15;
   var headerHeight = HEADER_GAP + 2 * LINE_HEIGHT;
   var dataX = CLOUD_X + GAP;
-
 
   window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.7) ';
