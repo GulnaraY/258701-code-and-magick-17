@@ -42,16 +42,19 @@
       xhr.responseType = 'json';
 
       xhr.addEventListener('load', function () {
+        xhr.removeEventListener('error', onConncectionError);
         if (xhr.status === 200) {
-          onLoad(xhr.response);
+          onLoad();
         } else {
           onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
         }
       });
 
-      xhr.addEventListener('error', function () {
+      var onConncectionError = function () {
         onError('Произошла ошибка соединения');
-      });
+      };
+
+      xhr.addEventListener('error', onConncectionError);
       xhr.open('POST', URL_SAVE);
       xhr.send(data);
     }

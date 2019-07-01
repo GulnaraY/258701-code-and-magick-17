@@ -77,7 +77,10 @@
      */
     onError: function (errorMessage) {
       var node = document.createElement('div');
-      node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      node.style.zIndex = '100';
+      node.style.margin = 'o auto';
+      node.style.textAlign = 'center';
+      node.style.backgroundColor = 'red';
       node.style.position = 'absolute';
       node.style.left = 0;
       node.style.right = 0;
