@@ -1,13 +1,14 @@
 'use strict';
 
 /**
- * Отрисовка похожих персонажей
- * Зависит от модуля backend.js, получает из него похожих персонажей
- */
+* Отрисовка похожих персонажей
+* Зависит от модуля backend.js, получает из него похожих персонажей
+*/
 (function () {
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var SIMILAR_CHARACTERS_COUNT = 4;
+  var isFirstLoad = false;
 
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -17,21 +18,24 @@
     return wizardElement;
   };
 
-  var onSuccess = function (wizards) {
-    var fragment = document.createDocumentFragment();
-    var selectedWizards = [];
-    var i = 0;
-    while (selectedWizards.length < SIMILAR_CHARACTERS_COUNT) {
-      var wizard = window.util.getRandomElement(wizards);
-      if (selectedWizards.includes(wizard)) {
-        continue;
+  window.onSuccessLoad = function (wizards) {
+    window.util.hideErrorMessage();
+    if (!isFirstLoad) {
+      var fragment = document.createDocumentFragment();
+      var selectedWizards = [];
+      var i = 0;
+      while (selectedWizards.length < SIMILAR_CHARACTERS_COUNT) {
+        var wizard = window.util.getRandomElement(wizards);
+        if (selectedWizards.includes(wizard)) {
+          continue;
+        }
+        fragment.appendChild(renderWizard(wizard));
+        selectedWizards[i] = wizard;
+        i++;
       }
-      fragment.appendChild(renderWizard(wizard));
-      selectedWizards[i] = wizard;
-      i++;
+      similarListElement.appendChild(fragment);
     }
-    similarListElement.appendChild(fragment);
+    isFirstLoad = true;
   };
 
-  window.backend.load(onSuccess, window.util.onError);
 })();

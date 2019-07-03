@@ -16,6 +16,7 @@
   var form = setupWindow.querySelector('.setup-wizard-form');
   var setupTop = '80px';
   var setupLeft = '50%';
+  var isFirstOpen = false;
 
   var onDocumentEscPress = function (evt) {
     window.util.isEscEvent(evt, userNameInput, closeWizardSetupWindow);
@@ -39,6 +40,7 @@
 
   var onSuccess = function () {
     closeWizardSetupWindow();
+    window.util.hideErrorMessage();
   };
 
   var onPopupSubmitButtonPress = function (evt) {
@@ -56,6 +58,9 @@
     document.addEventListener('keydown', onDocumentEscPress);
     form.addEventListener('submit', onPopupSubmitButtonPress);
     setupSubmitButton.addEventListener('keydown', onPopupCloseButtonKeyPress);
+    if (!isFirstOpen) {
+      window.backend.load(window.onSuccessLoad, window.util.onError);
+    }
   };
 
   wizardSetupOpenButton.addEventListener('click', function () {

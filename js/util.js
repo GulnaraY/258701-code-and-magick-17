@@ -12,6 +12,7 @@
     eyes: 1,
     fireball: 1
   };
+  var node = document.createElement('div');
 
   window.util = {
 
@@ -76,17 +77,33 @@
      * @param {string} errorMessage - описание ошибки
      */
     onError: function (errorMessage) {
-      var node = document.createElement('div');
-      node.style.zIndex = '100';
-      node.style.margin = 'o auto';
-      node.style.textAlign = 'center';
-      node.style.backgroundColor = 'red';
-      node.style.position = 'absolute';
-      node.style.left = 0;
-      node.style.right = 0;
-      node.style.fontSize = '30px';
       node.textContent = errorMessage;
-      document.body.insertAdjacentElement('afterbegin', node);
+      window.util.showErrorMessage();
+    },
+    showErrorMessage: function () {
+      node.style.display = 'block';
+    },
+
+    hideErrorMessage: function () {
+      node.style.display = 'none';
     }
   };
+
+  var createErrorElement = function () {
+    node.style.zIndex = '100';
+    node.style.margin = 'o auto';
+    node.style.textAlign = 'center';
+    node.style.backgroundColor = 'red';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+    node.addEventListener('click', function () {
+      window.backend.load(window.onSuccessLoad, window.util.onError);
+    });
+    document.body.insertAdjacentElement('afterbegin', node);
+    window.util.hideErrorMessage();
+  };
+
+  createErrorElement();
 })();

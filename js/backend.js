@@ -29,6 +29,11 @@
       });
 
       xhr.send();
+      var onConncectionError = function () {
+        onError('Произошла ошибка соединения');
+      };
+
+      xhr.addEventListener('error', onConncectionError);
     },
 
     /**
@@ -49,7 +54,6 @@
           onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
         }
       });
-
       var onConncectionError = function () {
         onError('Произошла ошибка соединения');
       };

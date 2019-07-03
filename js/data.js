@@ -42,16 +42,4 @@
       return character;
     }
   };
-  // /**
-  //  * создает случайного похожего персонажа
-  //  * @return {object} character - ссгенерированный случайный персонаж
-  //  */
-  // window.createCharacter = function () {
-  //   var character = {
-  //     name: window.util.getRandomElement(NAMES) + ' ' + window.util.getRandomElement(SURNAMES),
-  //     coatColor: window.util.getRandomElement(COAT_COLORS),
-  //     eyesColor: window.util.getRandomElement(EYES_COLORS)
-  //   };
-  //   return character;
-  // };
 })();
